@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
     char *file_name1, *file_name2;
     int ans_flag = 0, case_sen_flag = 0;
 
-    // Check how many command-line arguments inputted - need to be 3 or 4
+    // Check how many command-line arguments inputted - need to be 4 or 5
     if (argc != 4 && argc != 5) {
 
         fprintf(stderr, "Usage: %s <file1> <file2> [-v] [-i]\n", argv[0]);
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
     fclose(file1);
     fclose(file2);
 
-    /* Output the result */
+    /* Print the result */
     if (is_equal) {
         if (ans_flag) {
             printf("equal\n");
