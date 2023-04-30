@@ -11,25 +11,7 @@ void sig_handler(int signo)
 {
 }
 
-// void afterPipe(char **argv, int i)
-// {
-//     char *catArgv[10];
-//     int index = i+1;
-//     int start = 0, j;
-//     // while (argv[index])
-//     int len = strlen(*argv) - i;
-//     while (argv[index])
-//     {
-//         catArgv[j++] = argv[index++];
-//         printf("catArgv[%d] = %s\n", j, catArgv[j]);
-//     }
-
-//     catArgv[j] = NULL;
-//     argv = catArgv;
-// }
-
-void redirect_output_creat_file(char *filename)
-
+void redirect_output_creat_file(char *filename) // for >
 {
     int file = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (file == -1)
@@ -45,7 +27,7 @@ void redirect_output_creat_file(char *filename)
     close(file);
 }
 
-void redirect_output_append_file(char *filename)
+void redirect_output_append_file(char *filename) // for >>
 {
     int file = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
     if (file == -1)
@@ -61,7 +43,7 @@ void redirect_output_append_file(char *filename)
     close(file);
 }
 
-void execute_piped_commands(char **argv, int i)
+void execute_piped_commands(char **argv, int i) // for |
 {
     int fd[2];
     if (pipe(fd) == -1)
@@ -103,7 +85,7 @@ void execute_piped_commands(char **argv, int i)
     }
     else
     {
-        //parent process
+        // parent process
         int index = 0, k = i + 1;
         while (argv[k])
         {
@@ -158,7 +140,6 @@ int main()
         }
         if (pid == 0)
         {
-
             signal(SIGINT, sig_handler);
             for (int i = 0; argv[i] != NULL; i++)
             {
@@ -175,12 +156,13 @@ int main()
                     argv[i] = NULL;
                     break;
                 }
+
                 if (strcmp(argv[i], "|") == 0)
                 {
                     execute_piped_commands(argv, i);
                     i = -1;
                 }
-            } 
+            }
 
             if (execvp(argv[0], argv) == -1)
             {
@@ -190,6 +172,5 @@ int main()
         }
         wait(NULL);
     }
-
     return 0;
 }
