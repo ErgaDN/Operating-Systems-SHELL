@@ -14,6 +14,7 @@ gcc -Wall -g -o cmp cmp.c
 2. Run the programs (separately):
 
 NOTE - there are flags can be used when running the program:
+
 cmp:
 	-v : print “equal” or “distinct”
 	-i :  case insensitive
@@ -49,18 +50,13 @@ gcc -Wall -g encode.c -o encode
 gcc -Wall -g decode.c -o decode
 ```
 3. Run the programs:
-examples:
-```
-gcc -Wall -g encode.c -o encode
 
-gcc -Wall -g decode.c -o decode
+examples:
 ```
 ./encode codecA aaaBBB
 
 ./decode codecB asaWKW
 ```
-
-
 ## Part C - Basic Shell (stshell)
 This is a simple shell script written in C language. It reads user input and executes commands entered by the user.  
 The program has the following features:
