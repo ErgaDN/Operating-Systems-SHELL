@@ -106,7 +106,6 @@ void execute_piped_commands(char **argv, int i) // for |
 int main()
 {
     char input[1024];
-    char *token;
     char *argv[10];
 
     signal(SIGINT, sig_handler);
